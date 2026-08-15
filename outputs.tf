@@ -20,6 +20,6 @@ output "s3_bucket_versionings_region" {
 }
 output "s3_bucket_versionings_versioning_configuration" {
   description = "Map of versioning_configuration values across all s3_bucket_versionings, keyed the same as var.s3_bucket_versionings"
-  value       = { for k, v in aws_s3_bucket_versioning.s3_bucket_versionings : k => v.versioning_configuration if v.versioning_configuration != null && length(v.versioning_configuration) > 0 }
+  value       = { for k, v in aws_s3_bucket_versioning.s3_bucket_versionings : k => one(v.versioning_configuration) if v.versioning_configuration != null && length(v.versioning_configuration) > 0 }
 }
 
